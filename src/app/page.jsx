@@ -1,12 +1,19 @@
-import Image from "next/image";
 import Banner from "./components/Home/Banner";
 import About from "./components/Home/About";
+import ServiceCard from "./components/Home/ServiceCard";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
-      <Banner></Banner>
-      <About></About>
+      <section className="space-y-10">
+        <Banner></Banner>
+      </section>
+      <section className="space-y-10">
+        <About></About>
+      </section>
+      <section className="space-y-10">
+        <ServiceCard></ServiceCard>
+      </section>
     </>
   );
 }
