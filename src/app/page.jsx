@@ -2,6 +2,9 @@ import Banner from "./components/Home/Banner";
 import About from "./components/Home/About";
 import ServiceCard from "./components/Home/ServiceCard";
 
+export const metadata = {
+  title: "Home"
+};
 export default async function Home() {
   return (
     <>

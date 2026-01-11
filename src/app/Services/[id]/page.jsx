@@ -1,7 +1,9 @@
 import { getSingleService } from "@/src/actions/server/Service";
 import Image from "next/image";
 import Link from "next/link";
-
+export const metadata = {
+  title: "Service Details"
+};
 const ServiceDetail = async ({ params }) => {
   const { id } = await params;
   const service = await getSingleService(id);

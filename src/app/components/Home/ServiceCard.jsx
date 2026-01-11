@@ -1,6 +1,5 @@
 import React from "react";
 
-// import { servicesData } from "../../data/ServiceData";
 import Image from "next/image";
 import { getService } from "@/src/actions/server/Service";
 import Link from "next/link";
