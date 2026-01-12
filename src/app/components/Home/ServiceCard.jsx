@@ -7,13 +7,13 @@ const services = await getService();
 
 const ServiceCard = () => {
   return (
-    <section className="py-16 bg-base-100">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-10 bg-base-100 md:mt-25">
+      <div className="w-full md:max-w-7xl mx-auto">
         <h2 className="text-3xl text-neutral font-bold mb-12 text-center">
           Our Services
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-3 gap-y-5 md:gap-x-5 md:px-0">
           {services.map((service) => (
             <div
               key={service.id}
@@ -35,12 +35,12 @@ const ServiceCard = () => {
                   {service.description}
                 </p>
                 <div className="flex justify-between items-center">
-                  <button className="bg-primary text-white text-[14px] md:text-[16px] px-2 md:px-4 py-2 rounded-lg  cursor-pointer hover:bg-teal-600 ">
+                  <button className="bg-primary text-white text-[14px]  px-2 md:px-4 py-2 rounded-lg  cursor-pointer hover:bg-teal-600 ">
                     Book Service
                   </button>
                   <Link
                     href={`/Services/${service._id.toString()}`}
-                    className="bg-primary text-white text-[14px] md:text-[16px] px-2 md:px-4 py-2 rounded-lg  cursor-pointer hover:bg-teal-600 "
+                    className="bg-primary text-white text-[14px] px-2 md:px-4 py-2 rounded-lg  cursor-pointer hover:bg-teal-600 "
                   >
                     View Details
                   </Link>

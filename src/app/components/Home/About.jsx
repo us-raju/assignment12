@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section className="py-16 bg-netural">
+    <section className="py-16 bg-base-100">
       <div className="max-w-7xl mx-auto px-4 flex flex-col-reverse md:flex-row  gap-10 items-center">
         <div className="md:w-[50%] w-full md:h-100">
           <h2 className="text-3xl md:text-4xl font-bold text-neutral mb-4">
