@@ -7,7 +7,7 @@ const services = await getService();
 
 const ServiceCard = () => {
   return (
-    <section className="py-10 bg-base-100 md:mt-25">
+    <section className="py-10 bg-base-100 md:mt-25 lg:mt-0">
       <div className="w-full md:max-w-7xl mx-auto">
         <h2 className="text-3xl text-neutral font-bold mb-12 text-center">
           Our Services
