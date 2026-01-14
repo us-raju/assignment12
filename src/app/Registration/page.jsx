@@ -23,7 +23,7 @@ const RegisterPage = () => {
     console.log(RegistrationData);
   };
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4">
+    <div className="min-h-screen flex items-center justify-center  px-4 my-10">
       <div className="w-full max-w-md bg-base-100 rounded-2xl shadow-lg p-8 border border-base-content">
         <h2 className="text-3xl font-bold text-neutral mb-6 text-center">
           Create an Account
