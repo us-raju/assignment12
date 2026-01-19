@@ -3,8 +3,16 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import NavLink from "./ActiveLink/NavLink";
+import { useAuth } from "@/src/Providers/AuthProvider";
+import Loading from "./Loading/Loading";
+
 
 const Navbar = () => {
+  const { user, loading } = useAuth();
+  if (loading) return <Loading></Loading>;
+  console.log("NAVBAR USER:", user);
+  console.log("LOADING:", loading);
+
   const links = (
     <>
       <li>
@@ -55,16 +63,25 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-netural font-medium">
             {links}
+           
           </ul>
         </div>
         <div className="navbar-end">
-          <Link
-            href="/login"
+           {
+           user ? <button
+            onClick={() => setOpen(false)}
+            className=" bg-teal-500 text-white text-center p-2 rounded-md hover:bg-teal-600"
+          >
+            LogOut
+          </button>:<Link
+            href="/Login"
             onClick={() => setOpen(false)}
             className=" bg-teal-500 text-white text-center p-2 rounded-md hover:bg-teal-600"
           >
             Login
           </Link>
+          }
+          
         </div>
       </div>
     </div>

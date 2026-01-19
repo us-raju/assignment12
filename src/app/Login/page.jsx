@@ -1,26 +1,52 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-// import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
+  const [eye, SetEye] = useState(false);
+  const router = useRouter();
 
-  //   const onSubmit = async (data) => {
-  //     await signIn("credentials", {
-  //       email: data.email,
-  //       password: data.password,
-  //       redirect: true,
-  //       callbackUrl: "/",
-  //     });
-  //   };
+  const handleLogin = async (data) => {
+    const res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+      // callbackUrl: "/",
+    });
+
+    if (res.ok) {
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Login successful",
+        showConfirmButton: false,
+        timer: 1000,
+      }).then(() => {
+        router.push("/");
+      });
+    } else {
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: res.error || "Login Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  };
 
   return (
     <form
-      onSubmit={handleSubmit("onSubmit")}
+      onSubmit={handleSubmit(handleLogin)}
       className="max-w-md mx-auto my-10 space-y-4 p-5 rounded-[10px] border border-base-content"
     >
-      <h2 className="text-2xl font-bold text-center">Login</h2>
+      <h2 className="text-2xl text-neutral font-bold text-center">Login</h2>
 
       <input
         {...register("email")}
@@ -28,12 +54,23 @@ const LoginPage = () => {
         className="input input-bordered w-full"
       />
 
-      <input
-        type="password"
-        {...register("password")}
-        placeholder="Password"
-        className="input input-bordered w-full"
-      />
+      <div className="relative">
+        <input
+          type={eye ? "text" : "password"}
+          {...register("password")}
+          placeholder="Password"
+          className="input input-bordered w-full pr-9"
+        />
+        {eye ? (
+          <span className="cursor-pointer absolute top-3 right-3">
+            <FaRegEye onClick={() => SetEye(!eye)} />
+          </span>
+        ) : (
+          <span className="cursor-pointer absolute top-3 right-3 ">
+            <FaRegEyeSlash onClick={() => SetEye(!eye)} />
+          </span>
+        )}
+      </div>
 
       <button className="btn btn-primary w-full">Login</button>
       <div className="text-center text-neutral">
@@ -72,6 +109,12 @@ const LoginPage = () => {
         </svg>
         Login with Google
       </button>
+      <p className="text-center text-sm text-base-content mt-4">
+        Create an Account{" "}
+        <a href="/Registration" className="text-primary font-medium">
+          Registration
+        </a>
+      </p>
     </form>
   );
 };

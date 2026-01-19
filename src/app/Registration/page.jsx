@@ -1,9 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -12,15 +15,34 @@ const RegisterPage = () => {
   } = useForm();
   const [eye, SetEye] = useState(false);
 
-  const handleRegistration = (data) => {
-    const RegistrationData = {
-      name: data.name,
-      nid: data.nid,
-      email: data.email,
-      phoneNumber: data.phoneNumber,
-    };
-    reset();
-    console.log(RegistrationData);
+  const handleRegistration = async (data) => {
+    const res = await fetch("/api/Registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (res.ok) {
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Registration successful",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      router.push("/");
+      reset();
+    } else {
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: result.message,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center  px-4 my-10">
